@@ -45,7 +45,7 @@ func listtypoiadeiwn(w http.ResponseWriter, r *http.Request) {
 		"templates/adminviews/typoiadeiwn.html",
 		"templates/adminviews/header.html",
 		"templates/adminviews/footer.html",
-		"templates/adminviews/navbar.html")
+		utils.GetRoleNavbar(r))
 	if err != nil {
 		fmt.Fprintf(w, "Error->%s", err)
 		return

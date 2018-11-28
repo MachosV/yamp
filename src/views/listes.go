@@ -40,7 +40,7 @@ func listes(w http.ResponseWriter, r *http.Request) {
 	}
 	t, err := utils.LoadTemplates("listes",
 		"templates/adminviews/listes.html",
-		"templates/adminviews/navbar.html",
+		utils.GetRoleNavbar(r),
 		"templates/adminviews/header.html",
 		"templates/adminviews/footer.html")
 	if err != nil {

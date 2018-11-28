@@ -61,7 +61,7 @@ func listaitiseis(w http.ResponseWriter, r *http.Request) {
 	datamap["CountAitiseis"] = <-ccountaitiseis
 	t, err := utils.LoadTemplates("listaitiseis",
 		"templates/adminviews/listaitiseis.html",
-		"templates/adminviews/navbar.html",
+		utils.GetRoleNavbar(r),
 		"templates/adminviews/header.html",
 		"templates/adminviews/footer.html")
 	if err != nil {

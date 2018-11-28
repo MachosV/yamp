@@ -13,11 +13,13 @@
                 <p>{{.Data.Proswpiko.Surname}} {{.Data.Proswpiko.Name}}</p>
             </div>
             <div class="panel-footer text-center">
+                {{if eq .Context.Role 8}}
                 <form action="dproswpiko" method="POST">
                     <input type="hidden" name="csrftoken" value={{.Context.Csrftoken}}>
                     <input type="hidden" name="id" value={{.Data.Proswpiko.ID}}>
                     <button type="submit" class="btn btn-danger"><span class="glyphicon glyphicon-trash"></span> Διαγραφή προσώπου</button>
-                </form>                                
+                </form> 
+                {{end}}                               
             </div>
         </div>
     </div>

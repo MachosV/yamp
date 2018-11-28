@@ -30,9 +30,9 @@ func getdyn(w http.ResponseWriter, r *http.Request) {
 	data = "Not found"
 	role := utils.GetSessionValue(r, "role")
 	roleint, _ := strconv.Atoi(role)
-	if label == "all" && roleint == variables.ADMIN {
+	if label == "all" && roleint >= variables.P1G {
 		data = getfulldyn(date)
-	} else if label != "all" && roleint == variables.ADMIN {
+	} else if label != "all" && roleint >= variables.P1G {
 		data = getdynlabel(date, labelform)
 	} else {
 		if utils.CheckLabelAuthed(r, labelform) {
@@ -52,6 +52,7 @@ func getfulldyn(d string) string {
 	cypiresies := make(chan []models.Ypiresia)
 	caitiseis := make(chan []models.Aitisi)
 	canafores := make(chan []models.Anafora)
+	cergasies := make(chan []models.Ergasia)
 	defer close(cproswpiko)
 	defer close(cadeies)
 	defer close(cypiresies)
@@ -64,11 +65,13 @@ func getfulldyn(d string) string {
 	go utils.GetDynYpiresiesAll(datefordb, cypiresies)
 	go utils.GetDynAitiseisAll(datefordb, caitiseis)
 	go utils.GetDynAnaforesAll(datefordb, canafores)
+	go utils.GetDynErgasiesAll(datefordb, cergasies)
 	dynamologio.Proswpiko = <-cproswpiko
 	dynamologio.Metaboles = <-cadeies
 	dynamologio.Ypiresies = <-cypiresies
 	dynamologio.Aitiseis = <-caitiseis
 	dynamologio.Anafores = <-canafores
+	dynamologio.Ergasies = <-cergasies
 	jsonString, err := json.MarshalIndent(dynamologio, "", " ")
 	if err != nil {
 		return err.Error()
@@ -83,11 +86,13 @@ func getdynlabel(d string, label int) string {
 	cypiresies := make(chan []models.Ypiresia)
 	caitiseis := make(chan []models.Aitisi)
 	canafores := make(chan []models.Anafora)
+	cergasies := make(chan []models.Ergasia)
 	defer close(cproswpiko)
 	defer close(cadeies)
 	defer close(cypiresies)
 	defer close(caitiseis)
 	defer close(canafores)
+	defer close(cergasies)
 	dtemp, _ := time.Parse("02/01/2006", d)
 	datefordb := fmt.Sprintf("%d/%d/%d", dtemp.Year(), dtemp.Month(), dtemp.Day())
 	go utils.GetDynProswpikoLabel(datefordb, label, cproswpiko)
@@ -95,11 +100,13 @@ func getdynlabel(d string, label int) string {
 	go utils.GetDynYpiresiesLabel(datefordb, label, cypiresies)
 	go utils.GetDynAitiseisLabel(datefordb, label, caitiseis)
 	go utils.GetDynAnaforesLabel(datefordb, label, canafores)
+	go utils.GetDynErgasiesLabel(datefordb, label, cergasies)
 	dynamologio.Proswpiko = <-cproswpiko
 	dynamologio.Metaboles = <-cadeies
 	dynamologio.Ypiresies = <-cypiresies
 	dynamologio.Aitiseis = <-caitiseis
 	dynamologio.Anafores = <-canafores
+	dynamologio.Ergasies = <-cergasies
 	jsonString, err := json.MarshalIndent(dynamologio, "", " ")
 	if err != nil {
 		return err.Error()

@@ -23,7 +23,7 @@
     <tbody>
         {{range .Aitiseis}}
         <tr class="aitisi" data-idaitisi={{.ID}}>
-            <td>{{.Perigrafi}}</td>
+            <td><a href="/raitisi?id={{.ID}}">{{.Perigrafi}}</a></td>
             <td>{{.Rank}}</td>
             <td>{{.Surname}}</td>
             <td>{{.Name}}</td>

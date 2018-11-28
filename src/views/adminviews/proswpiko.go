@@ -15,7 +15,7 @@ func init() {
 		middleware.Time(),
 		middleware.NoCache(),
 		middleware.NeedsSession(),
-		middleware.IsAdmin(),
+		middleware.IsP1g(),
 	))
 }
 
@@ -41,7 +41,7 @@ func proswpiko(w http.ResponseWriter, r *http.Request) {
 	data.Data = datamap
 	t, err := utils.LoadTemplates("proswpiko",
 		"templates/adminviews/proswpiko.html",
-		"templates/adminviews/navbar.html",
+		utils.GetRoleNavbar(r),
 		"templates/adminviews/header.html",
 		"templates/adminviews/footer.html")
 	if err != nil {

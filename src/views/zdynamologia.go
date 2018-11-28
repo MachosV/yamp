@@ -25,22 +25,16 @@ func dynamologia(w http.ResponseWriter, r *http.Request) {
 	role := utils.GetSessionValue(r, "role")
 	roleint, _ := strconv.Atoi(role)
 	labelredis, _ := strconv.Atoi(utils.GetSessionValue(r, "label"))
-	if roleint == variables.ADMIN {
+	if roleint >= variables.P1G {
 		go utils.GetIerarxia(clabels)
 	} else {
 		go utils.GetLabels(labelredis, clabels)
-	}
-	var navbar string
-	if roleint >= variables.ADMIN {
-		navbar = "./templates/adminviews/navbar.html"
-	} else {
-		navbar = "./templates/userviews/navbar.html"
 	}
 	t, err := utils.LoadTemplates("dynamologia",
 		"./templates/adminviews/dynamologia.html",
 		"./templates/adminviews/header.html",
 		"./templates/adminviews/footer.html",
-		navbar,
+		utils.GetRoleNavbar(r),
 	)
 	if err != nil {
 		fmt.Fprintf(w, "Error -> %s", err)

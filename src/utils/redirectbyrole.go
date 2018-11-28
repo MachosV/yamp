@@ -17,7 +17,7 @@ func RedirectByRole(r *http.Request) string {
 	if isAuthenticated == "false" || role == "" {
 		return "/"
 	}
-	if roleint >= variables.P1G {
+	if roleint >= variables.ADMIN {
 		return "/diaxeiristiko"
 	}
 	return "/dashboard"

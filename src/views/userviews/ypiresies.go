@@ -38,7 +38,7 @@ func ypiresies(w http.ResponseWriter, r *http.Request) {
 	}
 	t, err := utils.LoadTemplates("ypiresies",
 		"templates/userviews/ypiresies.html",
-		"templates/userviews/navbar.html",
+		utils.GetRoleNavbar(r),
 		"templates/userviews/header.html",
 		"templates/userviews/footer.html")
 	if err != nil {

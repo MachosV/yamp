@@ -67,7 +67,7 @@ function addlistenerloadmore(){
                     monada = rowtable.insertCell(-1)
                     egkrisi = rowtable.insertCell(-1)
                     aporripsi = rowtable.insertCell(-1)
-                    perigrafi.innerHTML = data[row].perigrafi
+                    perigrafi.innerHTML = "<a href=/raitisi?id="+data[row].id+">"+data[row].perigrafi+"</a>"
                     bathmos.innerHTML = data[row].rank
                     epitheto.innerHTML = data[row].surname
                     onoma.innerHTML = data[row].name

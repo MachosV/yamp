@@ -11,4 +11,6 @@ type Ergasia struct {
 	Date      string `json:"date"`
 	Name      string `json:"name"`
 	Surname   string `json:"surname"`
+	Rank      string `json:"rank"`
+	Monada    string `json:"monada"`
 }

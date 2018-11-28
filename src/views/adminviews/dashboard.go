@@ -27,7 +27,7 @@ func Diaxeiristiko(w http.ResponseWriter, r *http.Request) {
 	data.Context = context
 	t, err := utils.LoadTemplates("dashboard",
 		"./templates/adminviews/dashboard.html",
-		"./templates/adminviews/navbar.html",
+		utils.GetRoleNavbar(r),
 		"./templates/adminviews/header.html",
 		"./templates/adminviews/footer.html")
 	if err != nil {

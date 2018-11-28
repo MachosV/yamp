@@ -12,4 +12,5 @@ type Dynamologio struct {
 	Aitiseis  []Aitisi    `json:"aitiseis"`
 	Ypiresies []Ypiresia  `json:"ypiresies"`
 	Anafores  []Anafora   `json:"anafores"`
+	Ergasies  []Ergasia   `json:"ergasies"`
 }

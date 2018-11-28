@@ -2,6 +2,7 @@ package userviews
 
 import (
 	"fmt"
+	"log"
 	"middleware"
 	"net/http"
 	"utils"
@@ -25,9 +26,10 @@ func Dashboard(w http.ResponseWriter, r *http.Request) {
 	context := utils.LoadContext(r)
 	data := utils.Data{}
 	data.Context = context
+	log.Println(utils.GetRoleNavbar(r), utils.GetSessionValue(r, "role"))
 	t, err := utils.LoadTemplates("dashboard",
 		"templates/userviews/dashboard.html",
-		"templates/userviews/navbar.html",
+		utils.GetRoleNavbar(r),
 		"templates/userviews/header.html",
 		"templates/userviews/footer.html")
 	if err != nil {

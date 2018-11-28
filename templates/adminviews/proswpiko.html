@@ -1,6 +1,7 @@
 {{define "proswpiko"}}
 {{template "header"}}
 {{template "navbar"}}
+{{if ge .Context.Role 8}}
 <div class="container-fluid">
     <h3>Δημιουργία προσωπικού</h3>
     <p class="text-danger">{{.Context.Message}}</p>
@@ -29,7 +30,8 @@
         <button class="btn btn-primary" type="submit" value="Δημιουργία"><span class="glyphicon glyphicon-floppy-saved"></span>
             Δημιουργία</button>
     </form>
-</div>    
+</div>
+{{end}}   
 <div class="container-fluid">
     <h3>Λίστα προσωπικού</h3>
     <div class="row">

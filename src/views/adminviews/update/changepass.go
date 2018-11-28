@@ -30,7 +30,7 @@ func ChangePass(w http.ResponseWriter, r *http.Request) {
 	password2 := r.PostFormValue("password2")
 	if password1 != password2 {
 		messages.SetMessage(r, "Οι 2 κωδικοί χρήστη δεν ταιριάζουν")
-		http.Redirect(w, r, "/retrieveuser?username="+username, http.StatusMovedPermanently)
+		http.Redirect(w, r, "/retrieveuser?id="+username, http.StatusMovedPermanently)
 		return
 	}
 	hash, _ := bcrypt.GenerateFromPassword([]byte(password1), bcrypt.DefaultCost)
@@ -38,9 +38,9 @@ func ChangePass(w http.ResponseWriter, r *http.Request) {
 	_, err := stmt.Exec(hash, username)
 	if err != nil {
 		messages.SetMessage(r, "Σφάλμα κατά την αλλαγή κωδικού χρήστη")
-		http.Redirect(w, r, "/retrieveuser?username="+username, http.StatusMovedPermanently)
+		http.Redirect(w, r, "/retrieveuser?id="+username, http.StatusMovedPermanently)
 		return
 	}
 	messages.SetMessage(r, "Ο κωδικός τροποποιήθηκε επιτυχώς!")
-	http.Redirect(w, r, "/retrieveuser?username="+username, http.StatusMovedPermanently)
+	http.Redirect(w, r, "/retrieveuser?id="+username, http.StatusMovedPermanently)
 }

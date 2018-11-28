@@ -130,6 +130,8 @@ function parseDataFull(data){
     if(constdata.anafores == null){
         $("#result").append("<h4>Καμία αναφορά</h4>")
     }else{
+        $("#result").append("<h4>Αναφορές</h4>")
+        ulelement = document.createElement('ul')
         for(var anafora in constdata.anafores){
             lielement = document.createElement('li')
             lielement.style = "list-style:none"
@@ -144,6 +146,28 @@ function parseDataFull(data){
             lielement.appendChild(span2)
             ulelement.appendChild(lielement)
         }
+        $("#result").append(ulelement)
+    }
+    if(constdata.ergasies == null){
+        $("#result").append("<h4>Καμία εργασία</h4>")
+    }else{
+        $("#result").append("<h4>Εργασίες</h4>")
+        ulelement = document.createElement('ul')
+        for(var ergasia in constdata.ergasies){
+            lielement = document.createElement('li')
+            lielement.style = "list-style:none"
+            span1 = document.createElement('span')
+            a = document.createElement('a')
+            a.setAttribute('href',"retrieveproswpiko?id="+constdata.ergasies[ergasia].idperson);
+            a.innerHTML = constdata.ergasies[ergasia].surname+" "+constdata.ergasies[ergasia].name;
+            span1.appendChild(a)
+            span2 = document.createElement('span')
+            span2.innerHTML = " "+constdata.ergasies[ergasia].perigrafi
+            lielement.appendChild(span1)
+            lielement.appendChild(span2)
+            ulelement.appendChild(lielement)
+        }
+        $("#result").append(ulelement)
     }
     $("#datatoggle").click(function(e){
         if (state == 0){
@@ -198,6 +222,11 @@ function parseDataMin(data){
         $("#result").append("<h4>Καμία αναφορά</h4>")
     }else{
         $("#result").append("<h4>Αναφορές"+constdata.anafores.length+"</h4>")
+    }
+    if(constdata.ergasies == null){
+        $("#result").append("<h4>Καμία εργασία</h4>")
+    }else{
+        $("#result").append("<h4>Εργασίες "+constdata.ergasies.length+"</h4>")
     }
     $("#datatoggle").click(function(e){
         if (state == 0){

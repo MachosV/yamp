@@ -58,7 +58,7 @@ func listusers(w http.ResponseWriter, r *http.Request) {
 	data.Data = datamap
 	t, err := utils.LoadTemplates("users",
 		"templates/adminviews/users.html",
-		"templates/adminviews/navbar.html",
+		utils.GetRoleNavbar(r),
 		"templates/adminviews/header.html",
 		"templates/adminviews/footer.html")
 	if err != nil {

@@ -27,8 +27,15 @@
     </div>
 </div>
     <p class="text-info">{{.Context.Message}}</p>
-    <div>
-        <h3>Αλλαγή κωδικού πρόσβασης</h3>
+
+    <ul class="nav nav-tabs">
+        <li class="active"><a data-toggle="tab" href="#changepass">Αλλαγή κωδικού</a></li>
+        <li><a data-toggle="tab" href="#dbconnection">Σύνδεση με βάση</a></li>
+        <li><a data-toggle="tab" href="#xrewsiatomou">Σύνδεση λογαριασμού σε φυσικό πρόσωπο</a></li>
+    </ul>    
+<div class="tab-content">
+    <div id="changepass" class="tab-pane fade active">
+        <h4>Αλλαγή κωδικού πρόσβασης</h4>
         <form class="form-inline" action="changepass" method="POST">
             <div class="form-group">
                 <input class="form-control" type="password" required name="password1" placeholder="Κωδικός"> 
@@ -43,8 +50,9 @@
                  Αλλαγή κωδικού</button>
         </form>
     </div>
-    <div>
-        <h3>Σύνδεση με βάσεις</h3>
+
+    <div id="dbconnection" class="tab-pane fade">
+        <h4>Σύνδεση με βάσεις</h4>
         <form class="form-inline" action="updateuserlabel" method="POST">
             <div class="form-group">
                 <select class="form-control" name="label">
@@ -60,5 +68,22 @@
                 Αποθήκευση</button>
         </form>
     </div>
+
+    <div id="xrewsiatomou" class="tab-pane fade">
+        <h4>Χρέωση λογαριασμού σε φυσικό πρόσωπο</h4>
+        <form class="form-inline" method="POST" action="/xrewsilogariasmou">
+            <div class="form-group">
+                <select class="form-control" name="idperson">
+                    {{range .Data.Proswpiko}}
+                    <option value={{.ID}}>{{.Surname}} {{.Name}}</option>
+                    {{end}}
+                </select>
+                <input type="hidden" name="idaccount" value={{.Data.user.ID}}>
+                <input type="hidden" name="csrftoken" value={{.Context.Csrftoken}}> 
+            </div>
+        </form>
+    </div>
+</div>
 {{template "footer"}}
+<script src="js/bootstrap.min.js"></script>
 {{end}}
